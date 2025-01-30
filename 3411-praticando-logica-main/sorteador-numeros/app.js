@@ -1,29 +1,24 @@
 
-
-
 function sortear() {
     let quantidade = parseInt(document.getElementById('quantidade').value);
     let de = parseInt(document.getElementById('de').value);
     let ate = parseInt(document.getElementById('ate').value);
-    let numero = geraNumeroAleatorio(de, ate)
-    console.log(`Numero Gerado no inicio do codigo: ${numero}`)
-    let listaNumeros = []
+    let resultado = document.getElementById("resultado")
+    let sorteados = [];
+    let numero;
 
-
-    while (quantidade >= 1) {
-        if (!listaNumeros.includes(numero)) {
-            //console.log(`numeros antes dentro do if true: ${numero}`)
-            numero = geraNumeroAleatorio(de, ate)
-            //console.log(`numeros depois dentro do if true: ${numero}`)
-            listaNumeros.push(numero);
-
-        } else {
-            listaNumeros.push(numero);
+    for (let i = 0; i < quantidade; i++) {
+        numero = geraNumeroAleatorio(de, ate);
+        while (sorteados.includes(numero)) {
+            numero = geraNumeroAleatorio(de, ate);
         }
-
-        quantidade--;
+        sorteados.push(numero);
     }
-    alert(listaNumeros)
+
+    resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados: ${sorteados}</label>`;
+    let btnReiniciar = document.getElementById("btn-reiniciar");
+    btnReiniciar.setAttribute("class", "container__botao");
+
 
 }
 
@@ -35,5 +30,17 @@ function geraNumeroAleatorio(min, max) {
 
 
 function reiniciar() {
+    let btnReiniciar = document.getElementById('btn-reiniciar')
+    btnReiniciar.setAttribute('class', 'container__botao-desabilitado');
+
+    let quantidade = document.getElementById('quantidade');
+    quantidade.value = '';
+    let de = document.getElementById('de');
+    de.value = '';
+    let ate = document.getElementById('ate');
+    ate.value = '';
+
+    let resultado = document.getElementById('resultado')
+    resultado.innerHTML = '<label class="texto__paragrafo">Números sorteados: nenhum até agora</label>'
 
 }

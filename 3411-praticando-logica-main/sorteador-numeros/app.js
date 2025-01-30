@@ -36,6 +36,7 @@ function alterarStatusBotao() {
     }
 }
 
+
 function reiniciar() {
     document.getElementById('quantidade').value = '';
     document.getElementById('de').value = '';
